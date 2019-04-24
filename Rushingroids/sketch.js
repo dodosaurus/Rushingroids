@@ -18,7 +18,7 @@ function setup() {
 }
 
 function draw() {
-    background(bcgImg); // (bcgImg) ak chcem pozadie
+    background(0); // (bcgImg) ak chcem pozadie
     fill(255,0,0);
     text(frameCount, 20, 20);
     
@@ -35,7 +35,7 @@ function draw() {
         asteroid.push(new Asteroid(random(20, 380)));
     }
      
-    mainShip.zobraz();
+    mainShip.show();
     mainShip.move();
     
     for(var i = bullets.length - 1; i >= 0; i--) {

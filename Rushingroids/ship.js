@@ -4,25 +4,8 @@ class Ship {
         this.y = 200;
         this.r = 20;
         this.moveSp = 3;
+        
     }
-    
-//    move() {
-//        switch (keyIsDown(var a)) {
-//            case LEFT_ARROW: 
-//                this.x = this.x - this.moveSp;
-//                break;
-//            case RIGHT_ARROW: 
-//                this.x = this.x + this.moveSp;
-//                break;
-//            case UP_ARROW: 
-//                this.y = this.y - this.moveSp;
-//                break;
-//            case DOWN_ARROW: 
-//                this.y = this.y + this.moveSp;
-//                break;
-//        } 
-//    }
-    
     
     move() {
         if (keyIsDown(LEFT_ARROW)) {
@@ -34,18 +17,15 @@ class Ship {
         } else if (keyIsDown(DOWN_ARROW)) {
             this.y = this.y + this.moveSp;
         } 
+        
     }
     
-    zobraz() {
+    show() {
         noStroke();
         fill(255);
         rectMode(CENTER);
         rect(this.x, this.y, this.r, this.r);
         
-//        if(this.x == 0 || this.x == width || this.y == 0 || this.y == height) {
-//            this.x = this.x;
-//            this.y = this.y;
-//        }
     }
       
 }
@@ -54,7 +34,9 @@ class Shot {
     constructor() {
         this.x = mainShip.x + mainShip.r/2;
         this.y = mainShip.y;
-        this.r = 5;
+        this.w = 15;
+        this.h = 5;
+        this.rad = 20;
         this.shotSp = 10;
         
     }
@@ -62,12 +44,16 @@ class Shot {
     show() {
         noStroke();
         fill(255,0,0);
-        ellipseMode(CENTER);
-        ellipse(this.x, this.y, this.r, this.r);
+        rectMode(CENTER);
+        rect(this.x, this.y, this.w, this.h, this.rad);
+        
     }
     
     flow() {
         this.x = this.x + this.shotSp;
+        
     }
     
 }
+
+
