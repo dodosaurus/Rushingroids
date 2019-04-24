@@ -13,7 +13,7 @@ function preload() {
 function setup() {
     frameRate(60);
     createCanvas(600, 400);
-    mainShip = new Ship();
+    mainShip = new Ship(shipImg);
     asteroid.push(new Asteroid(random(20,380)));
  
 }
