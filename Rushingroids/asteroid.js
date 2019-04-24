@@ -25,7 +25,6 @@ class Asteroid {
         }
     }
     
-    
     offscreen() {
         if((width - this.x) == this.r) {
             return true;
