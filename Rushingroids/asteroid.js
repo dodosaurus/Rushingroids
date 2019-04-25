@@ -25,10 +25,11 @@ class Asteroid {
         }
     }
     
-    
     offscreen() {
-        if((width - this.x) == this.r) {
+        if(this.x <= -this.r) {
             return true;
+        } else {
+            return false;
         }
     }
     

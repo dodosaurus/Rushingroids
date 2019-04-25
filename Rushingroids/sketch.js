@@ -1,55 +1,83 @@
+//main runtime objects
+let UI;
+let asteroidsOut = 0;
+
 let mainShip;
 let asteroid = [];
 let bullets = [];
-let bcgImg;
-let betaAst;
+
+//preloading variables
+let bcgImg, shipImg;
 
 function preload() {
-    bcgImg = loadImage('assets/background.jpg')
+    bcgImg = loadImage('assets/background.jpg');
+    shipImg = loadImage('assets/spaceship.png');
 }
 
 function setup() {
-    frameRate(30);
+    frameRate(50);
     createCanvas(600, 400);
-    mainShip = new Ship();
+    
+    UI = new MainInterface();
+    
+    mainShip = new Ship(shipImg);
     asteroid.push(new Asteroid(random(20,380)));
-//    betaAst = new Asteroid();  
  
 }
 
+//main runtime iterator
 function draw() {
     background(0); // (bcgImg) ak chcem pozadie
     fill(255,0,0);
-    text(frameCount, 20, 20);
-    
 
-     for(var i = asteroid.length - 1; i >= 0; i--) {
+    //asteroids runtime
+    for(var i = 0; i <= asteroid.length - 1; i++) {
         asteroid[i].show();
         asteroid[i].flow();
         
         if (asteroid[i].touch(mainShip)) {
-            console.log('TOUCH');
+            console.log('TOUCH WARNING');
+        }
+        
+        if (asteroid[i].offscreen()) {
+            asteroid.shift();
+            asteroidsOut++;
         }
     }
-       if (frameCount % 75  == 0) {
+    
+    //asteroids generator
+    if (frameCount % 75  == 0) {
         asteroid.push(new Asteroid(random(20, 380)));
     }
      
+    //ship runtime
     mainShip.show();
     mainShip.move();
     
-    for(var i = bullets.length - 1; i >= 0; i--) {
+    
+    //bullets runtime
+    for(var i = 0 ; i <= bullets.length - 1; i++) {
         bullets[i].show();
         bullets[i].flow();
+        
+        if (bullets[i].offscreen()) {
+            bullets.shift();
+        }
     }
     
-    /*if (keyIsDown(SPACE)) {
-        bullets.push(new Shot);
-    }
- */
+    //showing UI elements
+    UI.scoreShow();
+    UI.showFramecount();
+    
+    //helping code here
+//    console.log("Asteroids: " + asteroid.length);
+//    console.log("Bullets: " + bullets.length);
+//    console.log(asteroid[0].x);
+
 }
 
 function mousePressed() {
+    //bullets generator
     bullets.push(new Shot);
 }
 

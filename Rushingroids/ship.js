@@ -1,10 +1,10 @@
 class Ship {
-    constructor() {
+    constructor(shipImg) {
         this.x = 25;
         this.y = 200;
-        this.r = 20;
+        this.r = 35;
         this.moveSp = 3;
-        
+        this.shipImg = shipImg       
     }
     
     move() {
@@ -21,10 +21,9 @@ class Ship {
     }
     
     show() {
-        noStroke();
-        fill(255);
-        rectMode(CENTER);
-        rect(this.x, this.y, this.r, this.r);
+        
+        imageMode(CENTER);
+        image(this.shipImg, this.x, this.y, this.r, 25);
         
     }
       
@@ -52,6 +51,14 @@ class Shot {
     flow() {
         this.x = this.x + this.shotSp;
         
+    }
+    
+    offscreen() {
+        if(this.x >= (this.w + width)) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
 }
