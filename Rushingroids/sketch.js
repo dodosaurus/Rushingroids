@@ -2,6 +2,11 @@
 let UI;
 let asteroidsOut = 0;
 
+//level difficulty modifiers
+let nextLevelCap = 10;
+let nextLevelSpeed = 0.05;
+let currentLevelSpeed = 0;
+
 let mainShip;
 let asteroid = [];
 let bullets = [];
@@ -11,7 +16,7 @@ let bcgImg, shipImg;
 
 function preload() {
     bcgImg = loadImage('assets/background.jpg');
-    shipImg = loadImage('assets/spaceship.png');
+    shipImg = loadImage('assets/spaceshipPixelRed.png');
 }
 
 function setup() {
@@ -33,16 +38,22 @@ function draw() {
     //asteroids runtime
     for(var i = 0; i <= asteroid.length - 1; i++) {
         asteroid[i].show();
-        asteroid[i].flow();
-        
+        asteroid[i].flow(currentLevelSpeed);
+    //collision
         if (asteroid[i].touch(mainShip)) {
             console.log('TOUCH WARNING');
         }
-        
+    //clearing not visible asteroids, counting score    
         if (asteroid[i].offscreen()) {
             asteroid.shift();
             asteroidsOut++;
+            
+            //difficulty - speed of asteroids rising   
+            if (asteroidsOut % nextLevelCap == 0) {
+                currentLevelSpeed = currentLevelSpeed + nextLevelSpeed
+            } 
         }
+     
     }
     
     //asteroids generator
@@ -69,10 +80,15 @@ function draw() {
     UI.scoreShow();
     UI.showFramecount();
     
+    //difficulty - speed of asteroids rising   
+//    if (asteroidsOut % nextLevelCap == 0) {
+//        currentLevelSpeed = currentLevelSpeed + nextLevelSpeed
+//    } 
+//    
     //helping code here
 //    console.log("Asteroids: " + asteroid.length);
 //    console.log("Bullets: " + bullets.length);
-//    console.log(asteroid[0].x);
+    console.log(currentLevelSpeed);
 
 }
 

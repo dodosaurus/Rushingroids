@@ -14,13 +14,14 @@ class Asteroid {
         ellipse(this.x, this.y, this.r)
     }
     
-    flow() {
-        this.x = this.x - this.speed;
+    flow(addSpeed) {
+        this.x = this.x - (this.speed + addSpeed);
     }
     
+    //working only if PNG of ship have w and h equal
     touch(lod) {
         var d = dist(this.x, this.y, lod.x, lod.y);       
-        if (d < (this.r/2 + lod.r/2)) {
+        if (d < (this.r/2 + lod.w/2)) {
             return true;
         }
     }

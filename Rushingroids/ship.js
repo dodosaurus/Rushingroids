@@ -2,7 +2,8 @@ class Ship {
     constructor(shipImg) {
         this.x = 25;
         this.y = 200;
-        this.r = 35;
+        this.w = 25;
+        this.h = 25;
         this.moveSp = 3;
         this.shipImg = shipImg       
     }
@@ -23,7 +24,7 @@ class Ship {
     show() {
         
         imageMode(CENTER);
-        image(this.shipImg, this.x, this.y, this.r, 25);
+        image(this.shipImg, this.x, this.y, this.w, this.h);
         
     }
       
@@ -31,7 +32,7 @@ class Ship {
 
 class Shot {
     constructor() {
-        this.x = mainShip.x + mainShip.r/2;
+        this.x = mainShip.x + mainShip.w/2;
         this.y = mainShip.y;
         this.w = 15;
         this.h = 5;
